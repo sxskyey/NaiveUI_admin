@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { reactive } from 'vue';
 import TheWelcome from '../../components/TheWelcome.vue'
 
 const inputs = document.querySelectorAll(".input");
@@ -19,7 +20,10 @@ let userName=
     
 //   }
 // }
-
+const loginParam:LoginReq=reactive({
+  userName:"",
+  password:""
+})
 inputs.forEach(input => {
   input.addEventListener('focus', focusFunction);
   input.addEventListener('blur', blurFunction);
