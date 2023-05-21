@@ -16,25 +16,26 @@ import { defineStore } from 'pinia'
   const userLogin=()=>booleanLoginPage=true
   
 
-  let booleanLoginPage:boolean=ref<boolean>(false)
+  let booleanLoginPage:boolean=false
 </script>
 
 <template>
-  <nav>
-    <n-button @click="userLogin" type="info">
-      <slot class=Login>
-      </slot>
-    </n-button>
-  </nav>
+  <div>
+    <el-button class="loginbtn" type="primary">教师登录</el-button>
+  </div>
 </template>
 
 <style scoped>
-nav {
-        font-family: 'Gill Sans';
-        display: flex;
-        color: red;
-        cursor:default;
-        color-scheme:inherit;
-        font-display:inherit;
-    }
+div {
+  border: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.loginbtn {
+  
+  
+}
 </style>
