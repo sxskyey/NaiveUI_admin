@@ -4,30 +4,30 @@ import TheWelcome from '../../components/TheWelcome.vue'
 
 const inputs = document.querySelectorAll(".input");
 
-function focusFunction() {
-  let parentNode = this.parentNode.parentNode;
-  parentNode.classList.add('focus');
-}
-function blurFunction() {
-  let parentNode = this.parentNode.parentNode;
-  if (this.value == '') {
-    parentNode.classList.remove('focus');
-  }
-}
-let userName=
+// function focusFunction() {
+//   let parentNode = this.parentNode.parentNode;
+//   parentNode.classList.add('focus');
+// }
+// function blurFunction() {
+//   let parentNode = this.parentNode.parentNode;
+//   if (this.value == '') {
+//     parentNode.classList.remove('focus');
+//   }
+// }
+// let userName=
 // const userLogin(userName, password) {
 //   if (userName=='袁静' & password=='123456'){
     
 //   }
 // }
-const loginParam:LoginReq=reactive({
-  userName:"",
-  password:""
-})
-inputs.forEach(input => {
-  input.addEventListener('focus', focusFunction);
-  input.addEventListener('blur', blurFunction);
-});
+// const loginParam:LoginReq=reactive({
+//   userName:"",
+//   password:""
+// })
+// inputs.forEach(input => {
+//   input.addEventListener('focus', focusFunction);
+//   input.addEventListener('blur', blurFunction);
+// });
 
 </script>
 
@@ -40,12 +40,12 @@ inputs.forEach(input => {
   </div>
   <div class="container">
     <div class="img">
-      <img src="src\assets\picture\home\img-3.svg" alt="">
+      <img src="src\assets\picture\home\img-3.svg" alt="" class="pic">
     </div>
     <div class="login-box">
       <form action="">
         <img src="src\assets\picture\home\avatar.svg" alt="" class="avatar">
-        <h2>Welcome</h2>
+        <h2>教师登录</h2>
         <div class="input-group">
           <div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32"><path d="M16 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7z" fill="currentColor"></path><path d="M26 30h-2v-5a5 5 0 0 0-5-5h-6a5 5 0 0 0-5 5v5H6v-5a7 7 0 0 1 7-7h6a7 7 0 0 1 7 7z" fill="currentColor"></path></svg>
@@ -63,19 +63,26 @@ inputs.forEach(input => {
           </div>
         </div>
         <a href="#">忘记密码?</a>
-        <n-button-group vertical>
-          <n-button size='large' type="info">
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp登录&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          </n-button>
-          <br>
-          <n-button size='large' type="default">
-            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp注册&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          </n-button>
+        <n-button-group horizontal>
+          <div>
+            <n-button round=true size='large' type="info">
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp登录&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            </n-button>
+          </div>
+          <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <div>
+            <n-button round=true size='large' type="default">
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp注册&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            </n-button>
+          </div>
         </n-button-group>
       </form>
     </div>
+    <div class="footer">
+      Copyright&copy;1989-2023 
+      <a href="http://192.168.0.99:80" target="_blank" class="copyright">水勘院公司幼儿园</a>
+    </div>
   </div>
-  <a href="https://www.ramostear.com" target="_blank" class="copyright">&copy; 水勘院公司幼儿园 1989~2023</a>
 </template>
 
 
@@ -98,20 +105,27 @@ body {
   z-index: -1;
 }
 
+.pic {
+  position: fixed;
+  height: 100%;
+  left: 200px;
+  bottom: 0;
+  z-index: -1;
+}
+
 .container {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 18rem;
+  
   padding: 0 2rem;
 }
 
-.img {
+/* .img {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
+} */
 
 .img img {
   width: 500px;
@@ -119,12 +133,11 @@ body {
 
 .title h1 {
 
-  position: absolute;
-  left: 40%;
-  top: 30%;
+  position: fixed;
+  text-align: center;
 
-
-  justify-content: center;
+  
+  
   font-size: 60px;
   font-family: '楷体';
   color: #56b49b;
@@ -132,7 +145,9 @@ body {
 }
 
 .login-box {
-  display: flex;
+  position: fixed;
+  left: 50%;
+  top: 20%;
   align-items: center;
   text-align: center;
 
@@ -150,7 +165,7 @@ form h2 {
   font-size: 2.9rem;
   text-transform: uppercase;
   margin: 15px 0;
-  color: #999;
+  color: #06b799;
 }
 
 .input-group {
@@ -241,7 +256,7 @@ form h2 {
 }
 
 a {
-  display: block;
+  
   text-align: right;
   text-decoration: none;
   color: #999;
@@ -250,7 +265,7 @@ a {
 }
 
 a:hover {
-  color: #38d39f;
+  color: #81a2c0;
 }
 
 .btn {
@@ -275,8 +290,16 @@ a:hover {
   background-position: right;
 }
 
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 18px;
+}
+
 .copyright {
-  position: absolute;
+  
   width: 100%;
   height: 50px;
   bottom: 2px;
@@ -317,9 +340,9 @@ a:hover {
     display: none;
   }
 
-  .container {
+  /* .container {
     grid-template-columns: 1fr;
-  }
+  } */
 
   .login-box {
     justify-content: center;
