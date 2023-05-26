@@ -4,9 +4,9 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <RouterView />
+  <div id="app" v-wechat-title="$route.meta.title">
+    <RouterView />
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

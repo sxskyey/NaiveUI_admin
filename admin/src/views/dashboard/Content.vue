@@ -1,261 +1,184 @@
 <script setup lang="ts">
-import TheWelcome from '../../components/TheWelcome.vue'
+import { defineComponent, ref, reactive, onMounted } from 'vue'
 
-const inputs = document.querySelectorAll(".input");
-
-function focusFunction(){
-    let parentNode = this.parentNode.parentNode;
-    parentNode.classList.add('focus');
+const column1 = {
+  title: 'column1',
+  key: 'column1',
+  sorter: true,
+  sortOrder: false
 }
-function blurFunction(){
-    let parentNode = this.parentNode.parentNode;
-    if(this.value == ''){
-        parentNode.classList.remove('focus');
+
+const column2 = {
+  title: 'column2',
+  key: 'column2',
+  filter: true,
+  filterOptionValues: [],
+  filterOptions: [
+    {
+      label: 'Value1',
+      value: 1
+    },
+    {
+      label: 'Value2',
+      value: 2
     }
+  ]
 }
 
-inputs.forEach(input=>{
-    input.addEventListener('focus',focusFunction);
-    input.addEventListener('blur',blurFunction);
-});
+const columns = [
+  column1,
+  column2,
+  {
+    title: 'Column3',
+    key: 'column3'
+  }
+]
 
+const data = Array.apply(null, { length: 987 }).map((_, index) => {
+  return {
+    column1: index,
+    column2: (index % 2) + 1,
+    column3: 'a' + index
+  }
+})
+
+function query (page, pageSize = 10, order = 'ascend', filterValues = []) {
+  return new Promise((resolve) => {
+    const copiedData = data.map((v) => v)
+    const orderedData = order === 'descend' ? copiedData.reverse() : copiedData
+    const filteredData = filterValues.length
+      ? orderedData.filter((row) => filterValues.includes(row.column2))
+      : orderedData
+    const pagedData = filteredData.slice((page - 1) * pageSize, page * pageSize)
+    const total = filteredData.length
+    const pageCount = Math.ceil(filteredData.length / pageSize)
+    setTimeout(
+      () =>
+        resolve({
+          pageCount,
+          data: pagedData,
+          total
+        }),
+      1500
+    )
+  })
+}
+
+export default defineComponent({
+  setup () {
+    const dataRef = ref([])
+    const loadingRef = ref(true)
+    const columnsRef = ref(columns)
+    const column1Reactive = reactive(column1)
+    const column2Reactive = reactive(column2)
+    const paginationReactive = reactive({
+      page: 1,
+      pageCount: 1,
+      pageSize: 10,
+      prefix ({ itemCount }) {
+        return `Total is ${itemCount}.`
+      }
+    })
+
+    onMounted(() => {
+      query(
+        paginationReactive.page,
+        paginationReactive.pageSize,
+        column1Reactive.sortOrder,
+        column2Reactive.filterOptionValues
+      ).then((data) => {
+        dataRef.value = data.data
+        paginationReactive.pageCount = data.pageCount
+        paginationReactive.itemCount = data.total
+        loadingRef.value = false
+      })
+    })
+
+    return {
+      data: dataRef,
+      columns: columnsRef,
+      column1: column1Reactive,
+      column2: column2Reactive,
+      pagination: paginationReactive,
+      loading: loadingRef,
+      rowKey (rowData) {
+        return rowData.column1
+      },
+      handleSorterChange (sorter) {
+        if (!sorter || sorter.columnKey === 'column1') {
+          if (!loadingRef.value) {
+            loadingRef.value = true
+            query(
+              paginationReactive.page,
+              paginationReactive.pageSize,
+              !sorter ? false : sorter.order,
+              column2Reactive.filterOptionValues
+            ).then((data) => {
+              column1Reactive.sortOrder = !sorter ? false : sorter.order
+              dataRef.value = data.data
+              paginationReactive.pageCount = data.pageCount
+              paginationReactive.itemCount = data.total
+              loadingRef.value = false
+            })
+          }
+        }
+      },
+      handleFiltersChange (filters) {
+        if (!loadingRef.value) {
+          loadingRef.value = true
+          const filterValues = filters.column2 || []
+          query(
+            paginationReactive.page,
+            paginationReactive.pageSize,
+            column1Reactive.sortOrder,
+            filterValues
+          ).then((data) => {
+            column2Reactive.filterOptionValues = filterValues
+            dataRef.value = data.data
+            paginationReactive.pageCount = data.pageCount
+            paginationReactive.itemCount = data.total
+            loadingRef.value = false
+          })
+        }
+      },
+      handlePageChange (currentPage) {
+        if (!loadingRef.value) {
+          loadingRef.value = true
+          query(
+            currentPage,
+            paginationReactive.pageSize,
+            column1Reactive.sortOrder,
+            column2Reactive.filterOptionValues
+          ).then((data) => {
+            dataRef.value = data.data
+            paginationReactive.page = currentPage
+            paginationReactive.pageCount = data.pageCount
+            paginationReactive.itemCount = data.total
+            loadingRef.value = false
+          })
+        }
+      }
+    }
+  }
+})
 </script>
 
 <template>
-  <img src="img/bg.png" alt="" class="wave">
-    <div class="container">
-        <div class="img">
-            <img src="img/img-3.svg" alt="">
-        </div>
-        <div class="login-box">
-            <form action="">
-                <img src="img/avatar.svg" alt="" class="avatar">
-                <h2>Welcome</h2>
-                <div class="input-group">
-                    <div class="icon">
-                        <i class="fa fa-user"></i>
-                    </div>
-                    <div>
-                        <h5>Username</h5>
-                        <input type="text" class="input">
-                    </div>
-                </div>
-                <div class="input-group">
-                    <div class="icon">
-                        <i class="fa fa-lock"></i>
-                    </div>
-                    <div>
-                        <h5>Password</h5>
-                        <input type="password" class="input">
-                    </div>
-                </div>
-                <a href="#">Forgot Password?</a>
-                <input type="submit" class="btn" value="Login">
-            </form>
-        </div>
-    </div>
-    <a href="https://www.ramostear.com" target="_blank" class="copyright">&copy; Ramostear</a>
+  <n-data-table
+    remote
+    ref="table"
+    :columns="columns"
+    :data="data"
+    :loading="loading"
+    :pagination="pagination"
+    :row-key="rowKey"
+    @update:sorter="handleSorterChange"
+    @update:filters="handleFiltersChange"
+    @update:page="handlePageChange"
+  />
+   
 </template>
 
 
-<style>
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-body{
-    font-family: 'Roboto', sans-serif;
-}
-.wave{
-    position: fixed;
-    height: 100%;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-}
-.container{
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-gap: 18rem;
-    padding: 0 2rem;
-}
-.img{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-.img img{
-    width: 500px;
-}
-
-.login-box{
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-form{
-    width: 360px;
-}
-.avatar{
-    width: 100px;
-}
-form h2{
-    font-size: 2.9rem;
-    text-transform: uppercase;
-    margin: 15px 0;
-    color: #999;
-}
-
-.input-group{
-    position: relative;
-    display: grid;
-    grid-template-columns: 7% 93%;
-    margin: 25px 0;
-    padding: 5px 0;
-    border-bottom: 2px solid #d9d9d9;
-}
-
-.input-group:nth-child(1){
-    margin-bottom: 4px;
-}
-.input-group:before,.input-group:after{
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background-color: #38d39f;
-    transition: .5s;
-}
-.input-group:after{
-    right: 50%;
-}
-.input-group:before{
-    left: 50%;
-}
-.icon{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.icon i{
-    color: #d9d9d9;
-    transition: .5s;
-}
-
-.input-group > div{
-    position: relative;
-    height: 45px;
-}
-
-.input-group >div > h5{
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #d9d9d9;
-    font-size: 18px;
-    transition: .3s;
-}
-.input-group.focus .icon i{
-    color: #38d39f;
-}
-.input-group.focus div h5{
-    top: -5px;
-    font-size: 15px;
-}
-.input-group.focus:after,.input-group.focus:before{
-    width: 50%;
-}
-.input{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    border: none;
-    outline: none;
-    background: none;
-    padding: 0.5rem 0.7rem;
-    font-size: 1.2rem;
-    color: #555;
-    font-family: 'Roboto', sans-serif;
-}
-a{
-    display: block;
-    text-align: right;
-    text-decoration: none;
-    color: #999;
-    font-size: 0.9rem;
-    transition: .3s;
-}
-a:hover{
-    color: #38d39f;
-}
-.btn{
-    display: block;
-    width: 100%;
-    height: 50px;
-    border-radius: 25px;
-    margin: 1rem 0;
-    font-size: 1.2rem;
-    outline: none;
-    border: none;
-    background-image: linear-gradient(to right,#32be8f,#38d39f,#32be8f);
-    cursor: pointer;
-    color: #fff;
-    text-transform: uppercase;
-    font-family: 'Roboto', sans-serif;
-    background-size: 200%;
-    transition: .5s;
-}
-.btn:hover{
-    background-position: right;
-}
-.copyright{
-    position: absolute;
-    width: 100%;
-    height: 50px;
-    bottom: 2px;
-    color: #38d39f;
-    text-align: center;
-    font-size: 18px;
-    font-family: 'Roboto', sans-serif;
-}
-
-/*媒体查询*/
-@media screen and (max-width: 1080px) {
-    .container{
-        grid-gap: 9rem;
-    }
-}
-@media screen and (max-width: 1024px) {
-    form{
-        width: 290px;
-    }
-    form h2{
-        font-size: 2.4rem;
-        margin: 8px 0;
-    }
-    .img img{
-        width: 360px;
-    }
-}
-@media screen and (max-width: 768px) {
-    .wave{
-        display: none;
-    }
-    .img{
-        display: none;
-    }
-    .container{
-        grid-template-columns: 1fr;
-    }
-    .login-box{
-        justify-content: center;
-    }
-}
+<style scoped>
 </style>

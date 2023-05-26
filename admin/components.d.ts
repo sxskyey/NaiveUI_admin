@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NButtonGroup: typeof import('naive-ui')['NButtonGroup']
+    NDataTable: typeof import('naive-ui')['NDataTable']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutFooter: typeof import('naive-ui')['NLayoutFooter']

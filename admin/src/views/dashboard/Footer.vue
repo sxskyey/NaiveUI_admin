@@ -1,12 +1,11 @@
-<script setup lang="ts">
-import TheWelcome from '../../components/TheWelcome.vue'
+<script setup lang=ts>
 </script>
 
 <template>
-  <nav>
-    <n-button type="warning">
-      <slot class=warn>
-      </slot>
-    </n-button>
-  </nav>
+  <div>
+  123
+</div>
 </template>
+
+<style scoped>
+</style>

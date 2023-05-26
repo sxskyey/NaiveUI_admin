@@ -1,50 +1,12 @@
-<script setup lang="ts">
-import { reactive } from 'vue';
-import TheWelcome from '../../components/TheWelcome.vue'
-
-const inputs = document.querySelectorAll(".input");
-
-// function focusFunction() {
-//   let parentNode = this.parentNode.parentNode;
-//   parentNode.classList.add('focus');
-// }
-// function blurFunction() {
-//   let parentNode = this.parentNode.parentNode;
-//   if (this.value == '') {
-//     parentNode.classList.remove('focus');
-//   }
-// }
-// let userName=
-// const userLogin(userName, password) {
-//   if (userName=='袁静' & password=='123456'){
-    
-//   }
-// }
-// const loginParam:LoginReq=reactive({
-//   userName:"",
-//   password:""
-// })
-// inputs.forEach(input => {
-//   input.addEventListener('focus', focusFunction);
-//   input.addEventListener('blur', blurFunction);
-// });
-
+<script setup lang=ts>
 </script>
 
 <template>
-  <img src="src\assets\picture\home\bg.png" alt="" class="wave">
-  <div class="title">
-    <h1>
-      水勘院公司幼儿园
-    </h1>
-  </div>
-  <div class="container">
-    <div class="img">
-      <img src="src\assets\picture\home\img-3.svg" alt="" class="pic">
-    </div>
+    
+    
     <div class="login-box">
       <form action="">
-        <img src="src\assets\picture\home\avatar.svg" alt="" class="avatar">
+        <img src="../../assets/picture/home/avatar.svg" alt="" class="avatar">
         <h2>教师登录</h2>
         <div class="input-group">
           <div class="icon">
@@ -78,15 +40,9 @@ const inputs = document.querySelectorAll(".input");
         </n-button-group>
       </form>
     </div>
-    <div class="footer">
-      Copyright&copy;1989-2023 
-      <a href="http://192.168.0.99:80" target="_blank" class="copyright">水勘院公司幼儿园</a>
-    </div>
-  </div>
 </template>
 
-
-<style>
+<style scoped>
 * {
   padding: 0;
   margin: 0;
@@ -116,38 +72,37 @@ body {
 .container {
   width: 100vw;
   height: 100vh;
-  display: grid;
+  display: flex;
+  flex: auto;
   
   padding: 0 2rem;
 }
 
-/* .img {
+.img {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-} */
+}
 
 .img img {
   width: 500px;
 }
 
 .title h1 {
-
-  position: fixed;
+  position: absolute;
   text-align: center;
-
-  
-  
-  font-size: 60px;
+  top: 15%; 
+  left: 0; 
+  right: 0;  
+  font-size: 50px;
   font-family: '楷体';
   color: #56b49b;
-
 }
 
 .login-box {
-  position: fixed;
+  position: absolute ;
   left: 50%;
-  top: 20%;
+  top: 30%;
   align-items: center;
   text-align: center;
 
@@ -264,9 +219,7 @@ a {
   transition: .3s;
 }
 
-a:hover {
-  color: #81a2c0;
-}
+
 
 .btn {
   display: block;
@@ -339,6 +292,17 @@ a:hover {
   .img {
     display: none;
   }
+
+  .title h1 {
+  position: absolute;
+  text-align: center;
+  top: 15%; 
+  left: 0; 
+  right: 0;  
+  font-size: 50px;
+  font-family: '楷体';
+  color: #56b49b;
+}
 
   /* .container {
     grid-template-columns: 1fr;
