@@ -3,9 +3,20 @@
 </script>
 
 <template>
-  <div>
-    123
+  <div class="container">
+    <ul>
+      <li>
+123
+      </li>
+    </ul>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.container {
+    
+    
+    
+    background-color: brown;
+}
+</style>

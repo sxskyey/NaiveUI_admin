@@ -1,18 +1,11 @@
 <script setup lang=ts>
+import {ref} from 'vue'
+
 </script>
 
 <template>
     <div class="header">
-        <n-button type="info">
-            教师登录
-        </n-button>
-        <n-button type="info">
-            教师登录
-        </n-button>
-        <n-button type="info">
-            教师登录
-        </n-button>
-        <n-button type="info">
+        <n-button type="info" @click="$emit('Shown')">
             教师登录
         </n-button>
     </div>
@@ -21,11 +14,8 @@
 <style scoped>
 .header {
     display: flex;
-    align-content: center;
-    justify-content: space-evenly;
     width: vw;
     height: auto;
     margin-top: 5px;
-    background-color: firebrick;
 }
 </style>

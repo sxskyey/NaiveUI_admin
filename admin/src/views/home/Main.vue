@@ -8,7 +8,10 @@
 
 <style scoped>
 .pic {
-    width: fit-content;
-    height: fit-content;
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    width: 500px;
+    
 }
 </style>

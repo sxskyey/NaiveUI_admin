@@ -1,20 +1,47 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { ref,reactive } from 'vue';
 import Header from './Header.vue';
 import Main from './Main.vue'
 import Login from './Login.vue'
 import Footer from './Footer.vue'
+import router from '@/router';
+import { useLoginStore } from '@/stores/counter'
+
+
+    const login = useLoginStore()
+
+
+const isShown = ref(true)
+function methodOne() {
+ isShown.value=!isShown.value
+}
+
+function methodTwo() {
+
+  if(login.account=="袁静" && login.pwd=="123456"){
+    router.push({
+    path: "/index"
+  })
+  }
+  else {
+    login.hint="账号或密码错误！"
+  }
+  
+}
 
 function getPic(name: string) {
   return new URL(`../../assets/picture/home/${name}`, import.meta.url).href;
 }
+
+
+
 </script>
 
 <template>
-  <img :src="getPic('bg.png')" alt="" class="wave" />
   <div class="container">
+    <img :src="getPic('bg.png')" alt="" class="wave" />
     <div class="header">
-      <Header></Header>
+      <Header @Shown="methodOne"></Header>
     </div>
     <div class="title">
       <h1>
@@ -22,8 +49,8 @@ function getPic(name: string) {
       </h1>
     </div>
     <div class="main">
-        <Main></Main>
-        <Login></Login>
+      <Main></Main>
+      <Login v-if="isShown" @Login="methodTwo" @Cancel="methodOne"></Login>
     </div>
     <div class="footer">
       <Footer></Footer>
@@ -33,41 +60,35 @@ function getPic(name: string) {
 
 
 <style>
-.header {
-  grid-area: header;
-}
-
-.title {
-  grid-area: title;
-}
-
-.main {
-  grid-area: main;
-}
-
-.footer {
-  grid-area: footer;
-}
-
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-
-
 .container {
   display: grid;
-  -ms-grid-row-span: 1;
-  grid:
-    'header header'
-    'title title'
-    'main main'
-    'footer footer'
+  grid-template-rows: 50px 100px 2fr 50px;
+
+
 }
 
-.main {}
+.header {
+  display: flex;
+  padding-right: 15px;
+  justify-content: end;
+}
+
+
+
+.main {
+  display: flex;
+  align-items: space-evenly;
+}
+
+img {
+  border: 100px #38d39f;
+}
 
 .wave {
   position: fixed;
@@ -78,11 +99,6 @@ function getPic(name: string) {
   z-index: -1;
 }
 
-
-.login {
-  display: flex;
-  align-content: center;
-}
 
 
 .title h1 {
@@ -95,15 +111,6 @@ function getPic(name: string) {
   font-size: 50px;
   font-family: '楷体';
   color: #56b49b;
-}
-
-.footer {
-  position: fixed;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  align-content: center;
-  
 }
 
 /*媒体查询*/
@@ -123,24 +130,17 @@ function getPic(name: string) {
     margin: 8px 0;
   }
 
-  .img img {
-    width: 360px;
-  }
+  
 }
 
 @media screen and (max-width: 768px) {
-  .wave {}
-
-  .img {}
 
   .title h1 {
     position: fixed;
     text-align: center;
     left: 50%;
     top: 10%;
-    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    font-size: 30px;
     font-family: '楷体';
     color: #56b49b;
   }
@@ -148,10 +148,9 @@ function getPic(name: string) {
   .copyright {
     width: 100%;
     height: 50px;
-    bottom: 2px;
     color: #38d39f;
     text-align: center;
-    font-size: 18px;
     font-family: 'Roboto', sans-serif;
   }
-}</style>
+}
+</style>

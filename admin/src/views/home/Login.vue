@@ -1,43 +1,50 @@
 <script setup lang=ts>
+
+import { useLoginStore } from '@/stores/counter'
+
+
+    const login = useLoginStore()
+
+    login.hint="hello"
 </script>
 
 <template>
-    
-    
     <div class="login-box">
       <form action="">
         <img src="../../assets/picture/home/avatar.svg" alt="" class="avatar">
         <h2>教师登录</h2>
-        <div class="input-group">
+        <div class="input-group account">
           <div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32"><path d="M16 4a5 5 0 1 1-5 5a5 5 0 0 1 5-5m0-2a7 7 0 1 0 7 7a7 7 0 0 0-7-7z" fill="currentColor"></path><path d="M26 30h-2v-5a5 5 0 0 0-5-5h-6a5 5 0 0 0-5 5v5H6v-5a7 7 0 0 1 7-7h6a7 7 0 0 1 7 7z" fill="currentColor"></path></svg>
           </div>
           <div>
-            <input type="text" class="input" placeholder="账号">
+            <input type="text" v-model="login.account" class="input" placeholder="账号">
           </div>
         </div>
-        <div class="input-group">
+        <div class="input-group password">
           <div class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32"><g fill="none"><path d="M18 20a2 2 0 1 1-4 0a2 2 0 0 1 4 0zm-8-10V8a6 6 0 0 1 12 0v2h1.5a3.5 3.5 0 0 1 3.5 3.5v13a3.5 3.5 0 0 1-3.5 3.5h-15A3.5 3.5 0 0 1 5 26.5v-13A3.5 3.5 0 0 1 8.5 10H10zm2-2v2h8V8a4 4 0 0 0-8 0zm-3.5 4A1.5 1.5 0 0 0 7 13.5v13A1.5 1.5 0 0 0 8.5 28h15a1.5 1.5 0 0 0 1.5-1.5v-13a1.5 1.5 0 0 0-1.5-1.5h-15z" fill="currentColor"></path></g></svg>
           </div>
           <div>
-            <input type="password" class="input" placeholder="密码">
+            <input type="password" v-model="login.pwd" class="input" placeholder="密码">
           </div>
         </div>
-        <a href="#">忘记密码?</a>
-        <n-button-group horizontal>
+        <div class="loginhint">
+            <label type="label">{{ login.hint }}</label>
+          </div>
+        <n-button-group horizontal class="btn">
           <div>
-            <n-button round=true size='large' type="info">
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp登录&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <n-button round=true size='large' type="info" class="loginbtn" @click="$emit('Login')">
+              登录
             </n-button>
           </div>
-          <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <div>
-            <n-button round=true size='large' type="default">
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp注册&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <n-button round=true size='large' type="default" class="cancelbtn" @click="$emit('Cancel')">
+              取消
             </n-button>
           </div>
         </n-button-group>
+        <a href="#" class="forget-password">忘记密码?</a>
       </form>
     </div>
 </template>
@@ -53,56 +60,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.wave {
-  position: fixed;
-  height: 100%;
-  left: 0;
-  bottom: 0;
-  z-index: -1;
-}
-
 .pic {
-  position: fixed;
   height: 100%;
   left: 200px;
   bottom: 0;
   z-index: -1;
 }
 
-.container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex: auto;
-  
-  padding: 0 2rem;
-}
-
-.img {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.img img {
-  width: 500px;
-}
-
-.title h1 {
-  position: absolute;
-  text-align: center;
-  top: 15%; 
-  left: 0; 
-  right: 0;  
-  font-size: 50px;
-  font-family: '楷体';
-  color: #56b49b;
-}
-
 .login-box {
   position: absolute ;
-  left: 50%;
-  top: 30%;
+  left: 60%;
+  top: 25%;
   align-items: center;
   text-align: center;
 
@@ -211,7 +179,6 @@ form h2 {
 }
 
 a {
-  
   text-align: right;
   text-decoration: none;
   color: #999;
@@ -219,18 +186,21 @@ a {
   transition: .3s;
 }
 
-
+.loginhint {
+  text-align: left;
+  color: #cf461c;
+}
 
 .btn {
-  display: block;
+  display: flex;
   width: 100%;
-  height: 50px;
+  justify-content: space-between;
   border-radius: 25px;
   margin: 1rem 0;
   font-size: 1.2rem;
   outline: none;
   border: none;
-  background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+  
   cursor: pointer;
   color: #fff;
   text-transform: uppercase;
@@ -239,10 +209,24 @@ a {
   transition: .5s;
 }
 
+.loginbtn {
+  width: 150px;
+  font-size: 18px;
+}
+
+.cancelbtn{
+  width: 150px;
+  font-size: 18px;
+}
+
 .btn:hover {
   background-position: right;
 }
 
+.forget-password {
+  display: flex;
+  justify-content: end;
+}
 .footer {
   position: fixed;
   bottom: 0;
