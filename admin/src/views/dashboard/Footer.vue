@@ -25,17 +25,17 @@
 
 .container {
     background-color: #1db2d8;
+    flex-shrink: 0;
 }
 
 .footer {
-
     color: #505253;
     position: fixed;
     display: flex;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    justify-content: center;
+    align-items: center;
     
 }
 
@@ -45,7 +45,6 @@ li {
 
 .copyright {
     color: #505253;
-    text-align: center;
     font-family: 'Roboto', sans-serif;
     text-decoration: none;
 }

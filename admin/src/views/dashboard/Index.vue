@@ -45,7 +45,7 @@ import Navibar from './Navibar.vue';
 
 .navibar {
   grid-column: span 2;
-  zoom: 0.8;
+  /* zoom: 0.8; */
 }
 
 .sidebar {
@@ -54,8 +54,7 @@ import Navibar from './Navibar.vue';
 }
 
 .header {
-  zoom: 1;
-
+  
 }
 
 
