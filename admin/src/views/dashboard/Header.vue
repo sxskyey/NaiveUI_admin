@@ -1,28 +1,17 @@
-<script setup lang=ts>
+<script setup lang="ts">
+
 </script>
 
 <template>
   <div class="container">
-    
-   <p>
-    header
-   </p>
+    <div class="main">
+      header
+    </div>
   </div>
 </template>
 
 <style scoped>
 .container {
-
-  
-    
-    
-    
-    background-color: aquamarine;
-    
-}
-
-p {
-  text-align: start;
-  font-size: 10px;
+    background-color: brown;
 }
 </style>

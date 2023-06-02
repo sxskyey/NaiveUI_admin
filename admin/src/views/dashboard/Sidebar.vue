@@ -4,19 +4,14 @@
 
 <template>
   <div class="container">
-    <ul>
-      <li>
-123
-      </li>
-    </ul>
+    <div class="main">
+      sidebar
+    </div>
   </div>
 </template>
 
 <style scoped>
 .container {
-    
-    
-    
-    background-color: brown;
+    background-color: rgb(116, 190, 73);
 }
 </style>

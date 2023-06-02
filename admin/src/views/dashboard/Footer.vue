@@ -3,7 +3,7 @@
 
 <template>
     <div class="container">
-        <ul class="footer">
+        <ul class="footer-item">
             <li>
                 Copyright&copy;1989-2023&nbsp&nbsp
             </li>
@@ -24,17 +24,13 @@
 }
 
 .container {
-    background-color: #1db2d8;
+    background-color: #1624a3;
     flex-shrink: 0;
 }
 
-.footer {
+.footer-item {
     color: #505253;
-    position: fixed;
     display: flex;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
     align-items: center;
     
 }

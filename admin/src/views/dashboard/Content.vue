@@ -6,16 +6,17 @@ import { defineComponent, ref, reactive, onMounted } from 'vue'
 
 <template>
 <div class="container">
-    ss
+    <div class="main">
+        content
+    </div>
 </div>
    
 </template>
 
 
 <style scoped>
-.container {
-    
-    position: fixed;
+
+.main {
     
     background-color: antiquewhite;
 }

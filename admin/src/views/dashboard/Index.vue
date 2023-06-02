@@ -15,7 +15,7 @@ import Navibar from './Navibar.vue';
     <div class="sidebar">
       <Sidebar></Sidebar>
     </div>
-    <div class="header">
+    <div class="head">
       <Header></Header>
     </div>
     <div class="content">
@@ -32,38 +32,33 @@ import Navibar from './Navibar.vue';
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-
 }
 
 .container {
-  width: 100vw;
-  height: 100vh;
   display: grid;
-  grid-template-rows: 50px 50px 1fr 50px;
-  grid-template-columns: 10% 1fr;
+  /* grid-template-rows: 50px 50px 1fr 50px;
+  grid-template-columns: 10% 1fr; */
 }
 
 .navibar {
-  grid-column: span 2;
-  /* zoom: 0.8; */
-}
-
-.sidebar {
-  grid-row: span 2;
-
-}
-
-.header {
   
 }
 
+.sidebar {
+  
+  /* grid-row: span 2; */
+}
 
+.head {
+  
+}
 
-.content {}
+.content {
+  
+}
 
 .footer {
-  grid-column: span 2;
-
-
+  
+  /* grid-column: span 2; */
 }
 </style>
