@@ -5,19 +5,14 @@ import { defineComponent, ref, reactive, onMounted } from 'vue'
 </script>
 
 <template>
-<div class="container">
-    <div class="main">
-        content
-    </div>
-</div>
+<section>
+    content
+</section>
    
 </template>
 
 
 <style scoped>
 
-.main {
-    
-    background-color: antiquewhite;
-}
+
 </style>
