@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/home/Index.vue'
 import Dashboard from '../views/dashboard/Index.vue'
-import test from '../views/test/Index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,17 +36,6 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: Dashboard,
-      meta:{
-        title:'水勘院幼儿园信息平台'
-      }
-    },
-    {
-      path: '/in',
-      name: 'in',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: test,
       meta:{
         title:'水勘院幼儿园信息平台'
       }
