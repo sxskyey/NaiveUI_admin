@@ -3,34 +3,36 @@ import { ref } from 'vue'
 
 </script>
 
-<template>
-  <div class="navi">
-    <div class="left">
-      <ul class="left-item">
+<template> 
+      <section>
+        <ul class="item">
         <li>
-          <img src="../../assets/picture/home/Logo.png" alt="" />
+          <img class="logo" src="../../assets/picture/home/Logo.png" alt="" />
         </li>
-        <li>
+        <li style="margin-left: 20px">
           山西省煤炭地质水文勘查研究院有限公司幼儿园
         </li>
       </ul>
-    </div>
-    <div class="center">
-      <n-input placeholder="请输入查询内容"/>
-    </div>
-    <div class="right">
-      <ul class="right-item">
+    
+      <ul class="item">
+        <li class="center-bar">
+        <n-input placeholder="请输入查询内容"/>
+      </li>
+      </ul>
+    
+      <ul class="item">
+        <li>
+          jiaoshi
+        </li>
         <li>
           <n-avatar round size="large" src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg" />
         </li>
       </ul>
-    </div>
-  </div>
+      </section>
 </template>
 
 <style scoped>
-.navi {
-  width: 100vw;
+section {
   background-color: rgb(41, 134, 134);
   display: flex;
   justify-content: space-between;
@@ -40,33 +42,49 @@ import { ref } from 'vue'
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  
 }
-.left-item {
+.item {
   display: flex;
   align-items: center;
-  margin-right: 20px;
-  /* background-color: rgb(202, 54, 182); */
+  
+  
+  
+}
+
+.logo {
+  width: 40px;
 }
 
 .center {
   display: flex;
   align-items: center;
-  margin-right: 100px;
-  max-width: 500px;
+  
+  
+  
+}
+
+.center-bar {
   flex-grow: 1;
+  max-width: 1000px;
 }
 
 .right {
   display: flex;
+  justify-content: end;
   align-items: center;
-  /* background-color: rgb(22, 199, 111); */
+  
+  
 }
 
-img {
-  zoom: 12%;
-  margin-left: 200px;
-  margin-right: 100px;
+.right-item {
+  
+  display: flex;
+  margin-right: 20px;
+  align-items: center;
+  
 }
+
 
 li {
   list-style-type: none;
