@@ -23,20 +23,24 @@
     padding: 0;
 }
 
+section {
+    display: flex;
+    align-items: end;
+}
+
 .footer-item {
     color: #505253;
     display: flex;
-    
     justify-content: center;
-
 }
 
 .item {
     
 }
+
 li {
     list-style: none;
-    align-items: center;
+    
 }
 
 .copyright {

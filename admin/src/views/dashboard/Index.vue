@@ -9,19 +9,19 @@ import Navibar from './Navibar.vue';
 
 <template>
   <div class="container">
-    <div class="item one">
+    <div class="item navibar">
       <Navibar></Navibar>
     </div>
-    <div class="item two">
+    <div class="item sidebar">
       <Sidebar></Sidebar>
     </div>
-    <div class="item">
+    <div class="item header">
       <Header></Header>
     </div>
-    <div class="item">
+    <div class="item content">
       <Content></Content>
     </div>
-    <div class="item t">
+    <div class="item footer">
       <Footer></Footer>
     </div>
   </div>
@@ -34,74 +34,43 @@ import Navibar from './Navibar.vue';
   box-sizing: border-box;
 }
 
-/* .container {
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-row: 60px 60px 60px 60px 60px;
-  
-} */
-
-
-
-
 .container {
   width: 100vw;
   height: 100vh;
   display: grid;
-  background-color: rgb(127, 204, 255);
-  grid-template-rows:  50px 50px 1fr 50px;
+  grid-template-rows:  50px 50px 1fr 30px;
   grid-template-columns: 10% 1fr;
 }
 
 div {
-  border: 1px solid rgb(248, 248, 248);
-  box-sizing: border-box;
-}
-
-
-.one {
-  grid-column: 1 / span 2;
-}
-
-.two {
-  grid-row: 2 / span 2;
-}
-
-.t {
-  grid-column: 1 / span 2;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* .navibar {
   
+}
+
+
+.navibar {
+  grid-column: 1 / span 2;
 }
 
 .sidebar {
-  
+  grid-row: 2 / span 2;
+  background-color:  rgb(8, 82, 100);
+  min-width: 190px;
   
 }
 
-.head {
-  
+.header {
+  justify-content: left;
 }
 
 .content {
-  
+
 }
 
 .footer {
+  grid-column: 1 / span 2;
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
   
-  
-} */
+}
 </style>

@@ -43,4 +43,13 @@ const router = createRouter({
   ]
 })
 
+router.beforeEach((to, from, next) => {//beforeEach是router的钩子函数，在进入路由前执行
+  if (to.meta.title) {//判断是否有标题
+	//console.log(to.meta.title)
+    document.title = to.meta.title
+  }
+  next()
+})
+
+
 export default router
