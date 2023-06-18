@@ -5,6 +5,8 @@ import { createPinia,defineStore } from 'pinia'
 import getPicture from './utils/get-picture'
 import VueWechatTitle from 'vue-wechat-title'
 
+import axios from 'axios'
+import QS from 'qs'
 import App from './App.vue'
 import router from './router'
 

@@ -18,6 +18,8 @@
     "@vicons/ionicons5": "^0.12.0",
     "element-plus": "^2.3.5",
     "pinia": "^2.0.36",
+    "qs": "^6.11.2",
+    "vant": "^4.4.1",
     "vue": "^3.3.2",
     "vue-router": "^4.2.0",
     "vue-wechat-title": "^2.0.7"

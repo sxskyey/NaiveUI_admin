@@ -13,8 +13,13 @@
   />
 </template>
 
-<script lang="js">
+<script lang="ts">
 import { defineComponent, ref, reactive, onMounted } from 'vue'
+import { kidAll} from "../../request/api";
+    //直接使用，一般用在进入页面入请求数据的接口
+
+const d= await kidAll()
+console.log(d)
 
 const column1 = {
   title: '序号',
@@ -49,11 +54,11 @@ const columns = [
   }
 ]
 
-const data = Array.apply(null, { length: 100 }).map((_, index) => {
+const data = Array.apply(null, { length: d.length }).map((_, index) => {
   return {
-    column1: index+1,
-    column2: (index / 2) + 1,
-    column3: 'a' + index
+    column1: d[index].kidName,
+    column2: d[index].pidNo,
+    column3: d[index].placeOfHukou
   }
 })
 

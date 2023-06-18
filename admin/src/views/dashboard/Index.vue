@@ -1,9 +1,10 @@
 <script setup lang=ts>
-import Header from './Header.vue';
+import Header from './Header.vue'
 import Content from './Content.vue'
 import Sidebar from './Sidebar.vue'
 import Footer from './Footer.vue'
-import Navibar from './Navibar.vue';
+import Navibar from './Navibar.vue'
+
 
 </script>
 
@@ -42,9 +43,7 @@ import Navibar from './Navibar.vue';
   grid-template-columns: 10% 1fr;
 }
 
-div {
-  
-}
+
 
 
 .navibar {
@@ -62,9 +61,7 @@ div {
   justify-content: left;
 }
 
-.content {
 
-}
 
 .footer {
   grid-column: 1 / span 2;
